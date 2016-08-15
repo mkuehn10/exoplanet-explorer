@@ -64,6 +64,37 @@ Instructions:
 
     Your code goes here!
      */
+      getJSON('../data/earth-like-results.json')
+        .then(function(response) {
+          addSearchHeader(response.query);
+          return getJSON(response.results[0]);
+        })
+        .catch(function(error) {
+          console.log(error);
+          addSearchHeader('unknown');
+          throw Error('Search request error');
+        })
+        .then(function(response) {
+          createPlanetThumb(response);
+        })
+
+
     // getJSON('../data/earth-like-results.json')
+    // .then(function(response) {
+    //   addSearchHeader(response.query);
+    //   // console.log(response.results);
+    //   return get(response.results[0]);
+    // })
+    // .then(function(response) {
+    //   return getJSON(response.url);
+    // })
+    // .then(function(response) {
+    //   //console.log(response.url);
+    //   //getJSON(response.url).then(function(response) {
+    //     //console.log(response);
+    //     createPlanetThumb(response);
+    //   //});
+    //   //createPlanetThumb(getJSON(response));
+    // })
   });
 })(document);
